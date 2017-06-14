@@ -1,4 +1,6 @@
-package com.developers.chukimmuoi.androidkotlin.ui.base
+package com.developers.chukimmuoi.androidkotlin.listener.callback
+
+import java.util.*
 
 /**
  * @author  : Hanet Electronics
@@ -9,9 +11,7 @@ package com.developers.chukimmuoi.androidkotlin.ui.base
  * @Project : AndroidKotlin
  * Created by chukimmuoi on 6/13/17.
  */
-interface BasePresenter<V : BaseView> {
+interface ICallback {
 
-    fun attachView(view: V): Unit
-
-    fun detachView(): Unit
+    fun onAction(objects: Objects?)
 }
