@@ -3,12 +3,15 @@ package com.developers.chukimmuoi.androidkotlin
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import com.developers.chukimmuoi.androidkotlin.listener.callback.ICallback
+import com.developers.chukimmuoi.androidkotlin.ui.base.BaseActivity
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +23,20 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
+
+            showDialogBasic("Action", "Replace with your own action", "OK", object : ICallback {
+                override fun onAction(objects: Objects?) {
+
+                }
+            }, "Replace", object : ICallback {
+                override fun onAction(objects: Objects?) {
+
+                }
+            }, "Cancel", object : ICallback {
+                override fun onAction(objects: Objects?) {
+
+                }
+            })
         }
     }
 

@@ -20,7 +20,7 @@ import java.util.logging.Logger
  * Created by chukimmuoi on 6/13/17.
  */
 
-class BaseActivity : AppCompatActivity(), BaseView {
+open class BaseActivity : AppCompatActivity(), BaseView {
 
     private val TAG = Logger.getLogger(BaseActivity::class.java.name)
 
