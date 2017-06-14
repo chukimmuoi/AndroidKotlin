@@ -14,39 +14,39 @@ import com.developers.chukimmuoi.androidkotlin.listener.callback.ICallback
 
 interface BaseView {
     fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback,
-                        negative: String, negativeCallback: ICallback,
-                        neutral: String, neutralCallback: ICallback)
+                        positive: String, positiveCallback: ICallback?,
+                        negative: String?, negativeCallback: ICallback?,
+                        neutral: String?, neutralCallback: ICallback?)
 
     fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback,
-                        negative: String, negativeCallback: ICallback)
+                        positive: String, positiveCallback: ICallback?,
+                        negative: String?, negativeCallback: ICallback?)
 
     fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback,
-                        negative: String)
+                        positive: String, positiveCallback: ICallback?,
+                        negative: String?)
 
     fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback)
+                        positive: String, positiveCallback: ICallback?)
 
     fun showDialogBasic(title: String, content: String,
                         positive: String)
 
     fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback,
-                        negative: Int, negativeCallback: ICallback,
-                        neutral: Int, neutralCallback: ICallback)
+                        positive: Int, positiveCallback: ICallback?,
+                        negative: Int?, negativeCallback: ICallback?,
+                        neutral: Int?, neutralCallback: ICallback?)
 
     fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback,
-                        negative: Int, negativeCallback: ICallback)
+                        positive: Int, positiveCallback: ICallback?,
+                        negative: Int?, negativeCallback: ICallback?)
 
     fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback,
-                        negative: Int)
+                        positive: Int, positiveCallback: ICallback?,
+                        negative: Int?)
 
     fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback)
+                        positive: Int, positiveCallback: ICallback?)
 
     fun showDialogBasic(title: Int, content: Int,
                         positive: Int)

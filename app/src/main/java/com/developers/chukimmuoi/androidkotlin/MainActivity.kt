@@ -32,10 +32,6 @@ class MainActivity : BaseActivity() {
                 override fun onAction(objects: Objects?) {
 
                 }
-            }, "Cancel", object : ICallback {
-                override fun onAction(objects: Objects?) {
-
-                }
             })
         }
     }

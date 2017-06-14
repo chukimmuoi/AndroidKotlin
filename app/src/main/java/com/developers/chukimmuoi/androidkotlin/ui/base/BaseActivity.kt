@@ -29,9 +29,9 @@ open class BaseActivity : AppCompatActivity(), BaseView {
     private var mToast: Toast? = null
 
     override fun showDialogBasic(title: String, content: String,
-                                 positive: String, positiveCallback: ICallback,
-                                 negative: String, negativeCallback: ICallback,
-                                 neutral: String, neutralCallback: ICallback) {
+                                 positive: String, positiveCallback: ICallback?,
+                                 negative: String?, negativeCallback: ICallback?,
+                                 neutral: String?, neutralCallback: ICallback?) {
         dismissDialog()
 
         val builder = MaterialDialog.Builder(this)
@@ -49,14 +49,14 @@ open class BaseActivity : AppCompatActivity(), BaseView {
         }
 
         if (!TextUtils.isEmpty(negative)) {
-            builder.negativeText(negative).negativeColorRes(R.color.colorDialogNegative)
+            builder.negativeText(negative!!).negativeColorRes(R.color.colorDialogNegative)
             if (negativeCallback != null) {
                 builder.onNegative { dialog, which -> negativeCallback?.onAction(null) }
             }
         }
 
         if (!TextUtils.isEmpty(neutral)) {
-            builder.neutralText(neutral).neutralColorRes(R.color.colorDialogNeutral)
+            builder.neutralText(neutral!!).neutralColorRes(R.color.colorDialogNeutral)
             if (neutralCallback != null) {
                 builder.onNeutral { dialog, which -> neutralCallback?.onAction(null) }
             }
@@ -66,66 +66,67 @@ open class BaseActivity : AppCompatActivity(), BaseView {
     }
 
     override fun showDialogBasic(title: String, content: String,
-                                 positive: String, positiveCallback: ICallback,
-                                 negative: String, negativeCallback: ICallback) {
+                                 positive: String, positiveCallback: ICallback?,
+                                 negative: String?, negativeCallback: ICallback?) {
         showDialogBasic(title, content,
                 positive, positiveCallback,
                 negative, negativeCallback,
-                null!!, null!!)
+                null, null)
     }
 
     override fun showDialogBasic(title: String, content: String,
-                                 positive: String, positiveCallback: ICallback,
-                                 negative: String) {
+                                 positive: String, positiveCallback: ICallback?,
+                                 negative: String?) {
         showDialogBasic(title, content,
                 positive, positiveCallback,
-                negative, null!!)
+                negative, null)
     }
 
     override fun showDialogBasic(title: String, content: String,
-                                 positive: String, positiveCallback: ICallback) {
+                                 positive: String, positiveCallback: ICallback?) {
         showDialogBasic(title, content,
                 positive, positiveCallback,
-                null!!)
+                null)
     }
 
-    override fun showDialogBasic(title: String, content: String, positive: String) {
+    override fun showDialogBasic(title: String, content: String,
+                                 positive: String) {
         showDialogBasic(title, content,
-                positive, null!!)
+                positive, null)
     }
 
     override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int, positiveCallback: ICallback,
-                                 negative: Int, negativeCallback: ICallback,
-                                 neutral: Int, neutralCallback: ICallback) {
+                                 positive: Int, positiveCallback: ICallback?,
+                                 negative: Int?, negativeCallback: ICallback?,
+                                 neutral: Int?, neutralCallback: ICallback?) {
         showDialogBasic(getString(title), getString(content),
                 getString(positive), positiveCallback,
-                getString(negative), negativeCallback,
-                getString(neutral), neutralCallback)
+                getString(negative!!), negativeCallback,
+                getString(neutral!!), neutralCallback)
     }
 
     override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int, positiveCallback: ICallback,
-                                 negative: Int, negativeCallback: ICallback) {
+                                 positive: Int, positiveCallback: ICallback?,
+                                 negative: Int?, negativeCallback: ICallback?) {
         showDialogBasic(getString(title), getString(content),
                 getString(positive), positiveCallback,
-                getString(negative), negativeCallback,
-                null!!, null!!)
+                getString(negative!!), negativeCallback,
+                null, null)
     }
 
     override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int, positiveCallback: ICallback,
-                                 negative: Int) {
+                                 positive: Int, positiveCallback: ICallback?,
+                                 negative: Int?) {
         showDialogBasic(getString(title), getString(content),
                 getString(positive), positiveCallback,
-                getString(negative), null!!)
+                getString(negative!!), null)
     }
 
     override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int, positiveCallback: ICallback) {
+                                 positive: Int, positiveCallback: ICallback?) {
         showDialogBasic(getString(title), getString(content),
                 getString(positive), positiveCallback,
-                null!!)
+                null)
     }
 
     override fun showDialogBasic(title: Int, content: Int,
