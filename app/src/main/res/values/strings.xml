@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">AndroidKotlin</string>
     <string name="action_settings">Settings</string>
+
+    <!--START: DIALOG-->
+    <string name="dialog_text_ok">OK</string>
+    <string name="dialog_text_cancel">Cancel</string>
+    <string name="dialog_text_resume">Resume</string>
+
+    <string name="dialog_title_action">Action</string>
+
+    <string name="dialog_content_replace">Replace with your own action!</string>
+    <!--END  : DIALOG-->
 </resources>

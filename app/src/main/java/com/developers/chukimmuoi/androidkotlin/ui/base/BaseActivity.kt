@@ -1,7 +1,6 @@
 package com.developers.chukimmuoi.androidkotlin.ui.base
 
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
 import android.view.Gravity
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
@@ -41,25 +40,19 @@ open class BaseActivity : AppCompatActivity(), BaseView {
                 .content(content)
                 .contentColorRes(R.color.colorDialogContent)
 
-        if (!TextUtils.isEmpty(positive)) {
+        if (positive != null && positive.length > 0) {
             builder.positiveText(positive).positiveColorRes(R.color.colorDialogPositive)
-            if (positiveCallback != null) {
-                builder.onPositive { dialog, which -> positiveCallback?.onAction(null) }
-            }
+            positiveCallback?.let { builder.onPositive { dialog, which -> positiveCallback.onAction(null) } }
         }
 
-        if (!TextUtils.isEmpty(negative)) {
-            builder.negativeText(negative!!).negativeColorRes(R.color.colorDialogNegative)
-            if (negativeCallback != null) {
-                builder.onNegative { dialog, which -> negativeCallback?.onAction(null) }
-            }
+        if (negative != null && negative.length > 0) {
+            builder.negativeText(negative).negativeColorRes(R.color.colorDialogNegative)
+            negativeCallback?.let { builder.onNegative { dialog, which -> negativeCallback.onAction(null) } }
         }
 
-        if (!TextUtils.isEmpty(neutral)) {
-            builder.neutralText(neutral!!).neutralColorRes(R.color.colorDialogNeutral)
-            if (neutralCallback != null) {
-                builder.onNeutral { dialog, which -> neutralCallback?.onAction(null) }
-            }
+        if (neutral != null && neutral.length > 0) {
+            builder.neutralText(neutral).neutralColorRes(R.color.colorDialogNeutral)
+            neutralCallback?.let { builder.onNeutral { dialog, which -> neutralCallback.onAction(null) } }
         }
 
         mMaterialDialog = builder.show()
@@ -101,8 +94,8 @@ open class BaseActivity : AppCompatActivity(), BaseView {
                                  neutral: Int?, neutralCallback: ICallback?) {
         showDialogBasic(getString(title), getString(content),
                 getString(positive), positiveCallback,
-                getString(negative!!), negativeCallback,
-                getString(neutral!!), neutralCallback)
+                negative?.let { getString(it) }, negativeCallback,
+                neutral?.let { getString(it) }, neutralCallback)
     }
 
     override fun showDialogBasic(title: Int, content: Int,
@@ -110,7 +103,7 @@ open class BaseActivity : AppCompatActivity(), BaseView {
                                  negative: Int?, negativeCallback: ICallback?) {
         showDialogBasic(getString(title), getString(content),
                 getString(positive), positiveCallback,
-                getString(negative!!), negativeCallback,
+                negative?.let { getString(it) }, negativeCallback,
                 null, null)
     }
 
@@ -119,7 +112,7 @@ open class BaseActivity : AppCompatActivity(), BaseView {
                                  negative: Int?) {
         showDialogBasic(getString(title), getString(content),
                 getString(positive), positiveCallback,
-                getString(negative!!), null)
+                negative?.let { getString(it) }, null)
     }
 
     override fun showDialogBasic(title: Int, content: Int,
@@ -132,7 +125,7 @@ open class BaseActivity : AppCompatActivity(), BaseView {
     override fun showDialogBasic(title: Int, content: Int,
                                  positive: Int) {
         showDialogBasic(getString(title), getString(content),
-                getString(positive), null!!)
+                getString(positive), null)
     }
 
     override fun showDialogProgress(title: String, content: String, horizontal: Boolean) {

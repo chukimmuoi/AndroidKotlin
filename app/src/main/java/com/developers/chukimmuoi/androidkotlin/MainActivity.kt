@@ -24,15 +24,11 @@ class MainActivity : BaseActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
 
-            showDialogBasic("Action", "Replace with your own action", "OK", object : ICallback {
+            showDialogBasic(R.string.dialog_title_action, R.string.dialog_content_replace, R.string.dialog_text_ok, object : ICallback {
                 override fun onAction(objects: Objects?) {
-
+                    showToast("Button 1")
                 }
-            }, "Replace", object : ICallback {
-                override fun onAction(objects: Objects?) {
-
-                }
-            })
+            }, null, null)
         }
     }
 
