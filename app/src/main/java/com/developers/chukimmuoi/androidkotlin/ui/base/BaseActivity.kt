@@ -1,12 +1,17 @@
 package com.developers.chukimmuoi.androidkotlin.ui.base
 
+import android.graphics.Typeface
+import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.developers.chukimmuoi.androidkotlin.R
 import com.developers.chukimmuoi.androidkotlin.listener.callback.ICallback
-import java.util.logging.Logger
+import com.developers.chukimmuoi.androidkotlin.utils.TypefaceUtil
+
+
 
 
 /**
@@ -21,11 +26,54 @@ import java.util.logging.Logger
 
 open class BaseActivity : AppCompatActivity(), BaseView {
 
-    private val TAG = Logger.getLogger(BaseActivity::class.java.name)
+    private val TAG = BaseActivity::class.java.simpleName
+
+    var typefaceBold: Typeface? = null
+
+    var typefaceItalic: Typeface? = null
+
+    var typefaceLight: Typeface? = null
+
+    var typefaceMedium: Typeface? = null
+
+    var typefaceRegular: Typeface? = null
+
+    var typefaceThin: Typeface? = null
 
     private var mMaterialDialog: MaterialDialog? = null
 
     private var mToast: Toast? = null
+
+    override fun setContentView(@LayoutRes layoutResID: Int) {
+        super.setContentView(layoutResID)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        createTypeface()
+    }
+
+    override fun createTypeface() {
+        TypefaceUtil.overrideFont(applicationContext, "SERIF", "fonts/Roboto-Regular.ttf")
+        TypefaceUtil.overrideSize(this@BaseActivity, 0.5f)
+
+        typefaceBold    = Typeface.createFromAsset(assets, "fonts/Roboto-Bold.ttf")
+        typefaceItalic  = Typeface.createFromAsset(assets, "fonts/Roboto-Italic.ttf")
+        typefaceLight   = Typeface.createFromAsset(assets, "fonts/Roboto-Light.ttf")
+        typefaceMedium  = Typeface.createFromAsset(assets, "fonts/Roboto-Medium.ttf")
+        typefaceRegular = Typeface.createFromAsset(assets, "fonts/Roboto-Regular.ttf")
+        typefaceThin    = Typeface.createFromAsset(assets, "fonts/Roboto-Thin.ttf")
+    }
+
+    override fun destroyTypeface() {
+        typefaceBold    = null
+        typefaceItalic  = null
+        typefaceLight   = null
+        typefaceMedium  = null
+        typefaceRegular = null
+        typefaceThin    = null
+    }
 
     override fun showDialogBasic(title: String, content: String,
                                  positive: String, positiveCallback: ICallback?,
@@ -42,17 +90,23 @@ open class BaseActivity : AppCompatActivity(), BaseView {
 
         if (positive != null && positive.length > 0) {
             builder.positiveText(positive).positiveColorRes(R.color.colorDialogPositive)
-            positiveCallback?.let { builder.onPositive { dialog, which -> positiveCallback.onAction(null) } }
+            positiveCallback?.let {
+                builder.onPositive { dialog, which -> positiveCallback.onAction(null) }
+            }
         }
 
         if (negative != null && negative.length > 0) {
             builder.negativeText(negative).negativeColorRes(R.color.colorDialogNegative)
-            negativeCallback?.let { builder.onNegative { dialog, which -> negativeCallback.onAction(null) } }
+            negativeCallback?.let {
+                builder.onNegative { dialog, which -> negativeCallback.onAction(null) }
+            }
         }
 
         if (neutral != null && neutral.length > 0) {
             builder.neutralText(neutral).neutralColorRes(R.color.colorDialogNeutral)
-            neutralCallback?.let { builder.onNeutral { dialog, which -> neutralCallback.onAction(null) } }
+            neutralCallback?.let {
+                builder.onNeutral { dialog, which -> neutralCallback.onAction(null) }
+            }
         }
 
         mMaterialDialog = builder.show()
@@ -199,5 +253,18 @@ open class BaseActivity : AppCompatActivity(), BaseView {
     override fun dismissToast() {
         mToast?.cancel()
         mToast = null
+    }
+
+    override fun onStop() {
+        dismissDialog()
+        dismissToast()
+
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        destroyTypeface()
+
+        super.onDestroy()
     }
 }

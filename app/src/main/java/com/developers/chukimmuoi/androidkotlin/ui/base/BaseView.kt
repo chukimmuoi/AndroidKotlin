@@ -13,6 +13,10 @@ import com.developers.chukimmuoi.androidkotlin.listener.callback.ICallback
  */
 
 interface BaseView {
+    fun createTypeface()
+
+    fun destroyTypeface()
+
     fun showDialogBasic(title: String, content: String,
                         positive: String, positiveCallback: ICallback?,
                         negative: String?, negativeCallback: ICallback?,
