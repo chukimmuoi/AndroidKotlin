@@ -11,9 +11,6 @@ import com.developers.chukimmuoi.androidkotlin.R
 import com.developers.chukimmuoi.androidkotlin.listener.callback.ICallback
 import com.developers.chukimmuoi.androidkotlin.utils.TypefaceUtil
 
-
-
-
 /**
  * @author  : Hanet Electronics
  * @Skype   : chukimmuoi

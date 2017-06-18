@@ -15,6 +15,7 @@ import android.util.DisplayMetrics
  * @Project : AndroidKotlin
  * Created by chukimmuoi on 6/16/17.
  */
+
 class TypefaceUtil {
     companion object {
         /**
