@@ -3,7 +3,10 @@ package com.developers.chukimmuoi.androidkotlin.ui.base
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.Gravity
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
@@ -21,39 +24,101 @@ import com.developers.chukimmuoi.androidkotlin.utils.TypefaceUtil
  * Created by chukimmuoi on 6/13/17.
  */
 
-open class BaseActivity : AppCompatActivity(), BaseView {
+open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentView,
+        BaseFragment.OnFragmentListener {
 
     private val TAG = BaseActivity::class.java.simpleName
 
-    var typefaceBold: Typeface? = null
+    var typefaceBold   : Typeface? = null
 
-    var typefaceItalic: Typeface? = null
+    var typefaceItalic : Typeface? = null
 
-    var typefaceLight: Typeface? = null
+    var typefaceLight  : Typeface? = null
 
-    var typefaceMedium: Typeface? = null
+    var typefaceMedium : Typeface? = null
 
     var typefaceRegular: Typeface? = null
 
-    var typefaceThin: Typeface? = null
+    var typefaceThin   : Typeface? = null
 
     private var mMaterialDialog: MaterialDialog? = null
 
     private var mToast: Toast? = null
 
+    private var mFragmentManager: FragmentManager? = null
+
     override fun setContentView(@LayoutRes layoutResID: Int) {
         super.setContentView(layoutResID)
     }
 
+    /**
+     * Level 01
+     * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         createTypeface()
+
+        mFragmentManager = supportFragmentManager
+    }
+
+    /**
+     * Level 02
+     * Call when activity VISIBLE
+     * */
+    override fun onStart() {
+        super.onStart()
+    }
+
+    /**
+     * Level 02
+     * Call when activity STOP => RESTART => START
+     * */
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    /**
+     * Level 03
+     * Call when activity start interacting by user
+     * */
+    override fun onResume() {
+        super.onResume()
+    }
+
+    /**
+     * Level 03
+     * Call when save data, stop animation, CPU danger ...
+     * */
+    override fun onPause() {
+        super.onPause()
+    }
+
+    /**
+     * Level 02
+     * Call when activity INVISIBLE
+     * */
+    override fun onStop() {
+        dismissDialog()
+        dismissToast()
+
+        super.onStop()
+    }
+
+    /**
+     * Level 01
+     * */
+    override fun onDestroy() {
+        destroyTypeface()
+
+        mFragmentManager = null
+
+        super.onDestroy()
     }
 
     override fun createTypeface() {
         TypefaceUtil.overrideFont(applicationContext, "SERIF", "fonts/Roboto-Regular.ttf")
-        TypefaceUtil.overrideSize(this@BaseActivity, 0.5f)
+        TypefaceUtil.overrideSize(this@BaseActivity, 1.0f)
 
         typefaceBold    = Typeface.createFromAsset(assets, "fonts/Roboto-Bold.ttf")
         typefaceItalic  = Typeface.createFromAsset(assets, "fonts/Roboto-Italic.ttf")
@@ -252,16 +317,126 @@ open class BaseActivity : AppCompatActivity(), BaseView {
         mToast = null
     }
 
-    override fun onStop() {
-        dismissDialog()
-        dismissToast()
+    /**
+     * Handle event multi fragment
+     * */
+    override fun onFragmentAction(layoutId: Int, event: Int) {
 
-        super.onStop()
     }
 
-    override fun onDestroy() {
-        destroyTypeface()
+    override fun findingFragment(layoutId: Int, fragmentManager: FragmentManager?): Fragment {
+        return fragmentManager?.findFragmentById(layoutId) as Fragment
+    }
 
-        super.onDestroy()
+    override fun findingFragment(layoutId: Int): Fragment {
+        return findingFragment(layoutId, mFragmentManager)
+    }
+
+    override fun findingFragment(tag: String, fragmentManager: FragmentManager?): Fragment {
+        return fragmentManager?.findFragmentByTag(tag) as Fragment
+    }
+
+    override fun findingFragment(tag: String): Fragment {
+        return findingFragment(tag, mFragmentManager)
+    }
+
+    /**
+     * @param idLayoutContainer FrameLayout
+     * @param fragment          new Fragment()
+     * @param tag               FragmentCustom.class.getCanonicalName() or this.getClass().getCanonicalName()
+     * @param isSaveCache       saveCache back stack
+     * @param bundle            Set first data
+     */
+    override fun displayFragment(idLayoutContainer: Int, fragment: Fragment, tag: String,
+                                 isSaveCache: Boolean, bundle: Bundle?,
+                                 fragmentManager: FragmentManager?) {
+        val fragmentTransaction = fragmentManager?.beginTransaction()
+
+        if (bundle != null) {
+            fragment.arguments = bundle
+        }
+        fragmentTransaction?.replace(idLayoutContainer, fragment, tag)
+        if (isSaveCache) {
+            fragmentTransaction?.addToBackStack(tag)
+        }
+
+        fragmentTransaction?.commit()
+    }
+
+    override fun displayFragment(idLayoutContainer: Int, fragment: Fragment, tag: String,
+                                 isSaveCache: Boolean, bundle: Bundle?) {
+        displayFragment(idLayoutContainer, fragment, tag, isSaveCache, bundle, mFragmentManager)
+    }
+
+    override fun displayFragment(idLayoutContainer: Int, fragment: Fragment, tag: String,
+                                 isSaveCache: Boolean) {
+        displayFragment(idLayoutContainer, fragment, tag, isSaveCache, null)
+    }
+
+    /**
+     * @param idLayoutContainer FrameLayout
+     * @param fragment          new Fragment()
+     * @param tag               FragmentCustom.class.getCanonicalName() or this.getClass().getCanonicalName()
+     * @param tagParent         get fragment parent
+     * @param bundle            Set first data
+     */
+    override fun displayMultiFragment(idLayoutContainer: Int, fragment: Fragment, tag: String,
+                                      tagParent: String?, bundle: Bundle?,
+                                      fragmentManager: FragmentManager?) {
+        val fragmentTransaction = fragmentManager?.beginTransaction()
+
+        //Hide fragment parent.
+        if (!TextUtils.isEmpty(tagParent)) {
+            val parentFragment = findingFragment(tagParent as String)
+            if (parentFragment != null) {
+                fragmentTransaction?.hide(parentFragment)
+            }
+        }
+
+        //Show fragment if exist.
+        if (fragment.isAdded) {
+            fragmentTransaction?.show(fragment)
+        }
+        //If fragment not exist.
+        else {
+            //Remove old fragment if old fragment = tag.
+            val fragmentOld = findingFragment(tag)
+            if (fragmentOld != null) {
+                fragmentTransaction?.remove(fragmentOld)
+            }
+
+            //Add new fragment.
+            if (bundle != null) {
+                fragment.arguments = bundle
+            }
+
+            fragmentTransaction?.add(idLayoutContainer, fragment, tag)
+        }
+
+        fragmentTransaction?.commit()
+    }
+
+    override fun displayMultiFragment(idLayoutContainer: Int, fragment: Fragment, tag: String,
+                                      tagParent: String?, bundle: Bundle?) {
+        displayMultiFragment(idLayoutContainer, fragment, tag, tagParent, bundle, mFragmentManager)
+    }
+
+    override fun displayMultiFragment(idLayoutContainer: Int, fragment: Fragment, tag: String,
+                                      tagParent: String?) {
+        displayMultiFragment(idLayoutContainer, fragment, tag, tagParent, null)
+    }
+
+    /**
+     * Event key back
+     */
+    override fun backStackFragment(fragmentManager: FragmentManager?) {
+        val countFragment = fragmentManager?.backStackEntryCount ?: 0
+        if (countFragment > 0) {
+            fragmentManager?.popBackStack()
+        }
+    }
+
+    override fun backStackFragment() {
+        backStackFragment(mFragmentManager)
     }
 }
