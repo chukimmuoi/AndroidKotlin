@@ -427,16 +427,31 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
     }
 
     /**
-     * Event key back
+     * Event key back to home
      */
-    override fun backStackFragment(fragmentManager: FragmentManager?) {
+    override fun backStackFragmentHome(fragmentManager: FragmentManager?) {
         val countFragment = fragmentManager?.backStackEntryCount ?: 0
         if (countFragment > 0) {
-            fragmentManager?.popBackStack()
+            val firstFragment = fragmentManager?.getBackStackEntryAt(0)
+            fragmentManager?.popBackStack(firstFragment?.id as Int, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 
-    override fun backStackFragment() {
-        backStackFragment(mFragmentManager)
+    override fun backStackFragmentHome() {
+        backStackFragmentHome(mFragmentManager)
+    }
+
+    override fun onBackPressed(fragmentManager: FragmentManager?) {
+        val countFragment = fragmentManager?.backStackEntryCount ?: 0
+        if (countFragment > 1) {
+            fragmentManager?.popBackStack()
+        } else {
+            finish()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        onBackPressed(mFragmentManager)
     }
 }

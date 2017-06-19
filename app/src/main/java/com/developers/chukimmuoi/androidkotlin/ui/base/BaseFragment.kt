@@ -216,11 +216,11 @@ abstract class BaseFragment : Fragment(), BaseFragmentView {
         displayMultiFragment(idLayoutContainer, fragment, tag, tagParent, null)
     }
 
-    override fun backStackFragment(fragmentManager: FragmentManager?) {
-        mContext?.backStackFragment(fragmentManager)
+    override fun backStackFragmentHome(fragmentManager: FragmentManager?) {
+        mContext?.backStackFragmentHome(fragmentManager)
     }
 
-    override fun backStackFragment() {
-        backStackFragment(mFragmentManager)
+    override fun backStackFragmentHome() {
+        backStackFragmentHome(mFragmentManager)
     }
 }

@@ -45,7 +45,9 @@ interface BaseFragmentView : BaseView {
     fun displayMultiFragment(@IdRes idLayoutContainer: Int, fragment: Fragment, tag: String,
                              tagParent: String?)
 
-    fun backStackFragment(fragmentManager: FragmentManager?)
+    fun backStackFragmentHome(fragmentManager: FragmentManager?)
 
-    fun backStackFragment()
+    fun backStackFragmentHome()
+
+    fun onBackPressed(fragmentManager: FragmentManager?)
 }
