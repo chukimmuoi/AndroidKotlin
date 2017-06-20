@@ -223,4 +223,13 @@ abstract class BaseFragment : Fragment(), BaseFragmentView {
     override fun backStackFragmentHome() {
         backStackFragmentHome(mFragmentManager)
     }
+
+    override fun onBackPressed(fragmentManager: FragmentManager?) {
+        val countFragment = fragmentManager?.backStackEntryCount ?: 0
+        if (countFragment > 1) {
+            fragmentManager?.popBackStack()
+        } else {
+            mContext?.onBackPressed()
+        }
+    }
 }
