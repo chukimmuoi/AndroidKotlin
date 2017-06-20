@@ -1,5 +1,6 @@
 package com.developers.chukimmuoi.androidkotlin.ui.base
 
+import android.view.View
 import com.developers.chukimmuoi.androidkotlin.listener.callback.ICallback
 
 /**
@@ -80,4 +81,16 @@ interface BaseActivityView : BaseView {
     fun showToast(message: Int)
 
     fun dismissToast()
+
+    fun showSnackbar(view: View, message: String, typeTime: Int,
+                     actionName: String?, onClickListener: View.OnClickListener?)
+
+    fun showSnackbar(view: View, message: String, typeTime: Int)
+
+    fun showSnackbar(view: View, message: Int, typeTime: Int,
+                     actionName: Int?, onClickListener: View.OnClickListener?)
+
+    fun showSnackbar(view: View, message: Int, typeTime: Int)
+
+    fun dismissSnackbar()
 }

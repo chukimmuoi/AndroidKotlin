@@ -3,11 +3,13 @@ package com.developers.chukimmuoi.androidkotlin.ui.base
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.Gravity
+import android.view.View
 import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.developers.chukimmuoi.androidkotlin.R
@@ -44,6 +46,8 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
     private var mMaterialDialog: MaterialDialog? = null
 
     private var mToast: Toast? = null
+
+    private var mSnackbar: Snackbar? = null
 
     private var mFragmentManager: FragmentManager? = null
 
@@ -101,6 +105,7 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
     override fun onStop() {
         dismissDialog()
         dismissToast()
+        dismissSnackbar()
 
         super.onStop()
     }
@@ -315,6 +320,33 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
     override fun dismissToast() {
         mToast?.cancel()
         mToast = null
+    }
+
+    override fun showSnackbar(view: View, message: String, typeTime: Int,
+                              actionName: String?, onClickListener: View.OnClickListener?) {
+        dismissSnackbar()
+
+        mSnackbar = Snackbar.make(view, message, typeTime).setAction(actionName, onClickListener)
+        mSnackbar?.show()
+    }
+
+    override fun showSnackbar(view: View, message: String, typeTime: Int) {
+        showSnackbar(view, message, typeTime, null, null)
+    }
+
+    override fun showSnackbar(view: View, message: Int, typeTime: Int,
+                              actionName: Int?, onClickListener: View.OnClickListener?) {
+        showSnackbar(view, getString(message), typeTime,
+                actionName?.let { getString(actionName) }, onClickListener)
+    }
+
+    override fun showSnackbar(view: View, message: Int, typeTime: Int) {
+        showSnackbar(view, getString(message), typeTime)
+    }
+
+    override fun dismissSnackbar() {
+        mSnackbar?.dismiss()
+        mSnackbar = null
     }
 
     /**
