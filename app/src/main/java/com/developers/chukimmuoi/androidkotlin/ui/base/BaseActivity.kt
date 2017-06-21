@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.Gravity
@@ -383,6 +384,7 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
                                  isSaveCache: Boolean, bundle: Bundle?,
                                  fragmentManager: FragmentManager?) {
         val fragmentTransaction = fragmentManager?.beginTransaction()
+        addAnimation(fragmentTransaction)
 
         if (bundle != null) {
             fragment.arguments = bundle
@@ -416,6 +418,7 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
                                       tagParent: String?, bundle: Bundle?,
                                       fragmentManager: FragmentManager?) {
         val fragmentTransaction = fragmentManager?.beginTransaction()
+        addAnimation(fragmentTransaction)
 
         //Hide fragment parent.
         if (!TextUtils.isEmpty(tagParent)) {
@@ -485,5 +488,10 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
     override fun onBackPressed() {
         super.onBackPressed()
         onBackPressed(mFragmentManager)
+    }
+
+    override fun addAnimation(fragmentTransaction: FragmentTransaction?) {
+        fragmentTransaction?.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out,
+                R.anim.abc_popup_enter, R.anim.abc_popup_exit)
     }
 }

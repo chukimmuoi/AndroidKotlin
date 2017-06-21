@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 
 /**
  * @author  : Hanet Electronics
@@ -50,4 +51,6 @@ interface BaseFragmentView : BaseView {
     fun backStackFragmentHome()
 
     fun onBackPressed(fragmentManager: FragmentManager?)
+
+    fun addAnimation(fragmentTransaction: FragmentTransaction? = null)
 }
