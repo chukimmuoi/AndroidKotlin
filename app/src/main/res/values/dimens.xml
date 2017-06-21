@@ -1,3 +1,11 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!--TEXT SIZE-->
+    <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_normal">18sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+
+    <!--PROGRESS-->
+    <dimen name="item_circle_progress_80dp">80dp</dimen>
 </resources>
