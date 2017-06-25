@@ -15,7 +15,8 @@ import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.developers.chukimmuoi.androidkotlin.R
 import com.developers.chukimmuoi.androidkotlin.listener.callback.ICallback
-import com.developers.chukimmuoi.androidkotlin.utils.TypefaceUtil
+import com.developers.chukimmuoi.androidkotlin.utils.overrideFont
+import com.developers.chukimmuoi.androidkotlin.utils.overrideSize
 
 /**
  * @author  : Hanet Electronics
@@ -123,8 +124,8 @@ open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentVie
     }
 
     override fun createTypeface() {
-        TypefaceUtil.overrideFont(applicationContext, "SERIF", "fonts/Roboto-Regular.ttf")
-        TypefaceUtil.overrideSize(this@BaseActivity, 1.0f)
+        overrideFont(applicationContext, "SERIF", "fonts/Roboto-Regular.ttf")
+        overrideSize(this@BaseActivity, 1.0f)
 
         typefaceBold    = Typeface.createFromAsset(assets, "fonts/Roboto-Bold.ttf")
         typefaceItalic  = Typeface.createFromAsset(assets, "fonts/Roboto-Italic.ttf")
