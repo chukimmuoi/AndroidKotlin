@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.gravitysnaphelper;
+package com.developers.chukimmuoi.androidkotlin.commons.recycler.gravitysnaphelper;
 
 import android.os.Build;
 import android.support.annotation.NonNull;

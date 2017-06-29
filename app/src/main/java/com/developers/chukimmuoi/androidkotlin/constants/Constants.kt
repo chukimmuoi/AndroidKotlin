@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler
+package com.developers.chukimmuoi.androidkotlin.constants
 
 /**
  * @author  : Hanet Electronics

@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.progress;
+package com.developers.chukimmuoi.androidkotlin.commons.progress;
 
 import android.annotation.TargetApi;
 import android.content.Context;

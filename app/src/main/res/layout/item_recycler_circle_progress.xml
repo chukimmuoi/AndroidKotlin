@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.developers.chukimmuoi.androidkotlin.ui.custom.progress.CircleProgress
+    <com.developers.chukimmuoi.androidkotlin.commons.progress.CircleProgress
         android:id="@+id/progress_circle"
         android:layout_width="@dimen/item_circle_progress_80dp"
         android:layout_height="@dimen/item_circle_progress_80dp"

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.gravitysnaphelper;
+package com.developers.chukimmuoi.androidkotlin.commons.recycler.gravitysnaphelper;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

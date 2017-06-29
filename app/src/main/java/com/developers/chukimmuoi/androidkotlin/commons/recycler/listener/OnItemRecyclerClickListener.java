@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.listener;
+package com.developers.chukimmuoi.androidkotlin.commons.recycler.listener;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

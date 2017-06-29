@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.swipe
+package com.developers.chukimmuoi.androidkotlin.commons.swipe
 
 import android.content.Context
 import android.support.v4.widget.SwipeRefreshLayout

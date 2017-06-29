@@ -1,11 +1,12 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler
+package com.developers.chukimmuoi.androidkotlin.commons.recycler
 
 import android.content.Context
 import android.support.v7.widget.*
 import android.view.Gravity
-import com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.gravitysnaphelper.GravityPagerSnapHelper
-import com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.gravitysnaphelper.GravitySnapHelper
-import com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.listener.EndlessRecyclerViewScrollListener
+import com.developers.chukimmuoi.androidkotlin.commons.recycler.gravitysnaphelper.GravityPagerSnapHelper
+import com.developers.chukimmuoi.androidkotlin.commons.recycler.gravitysnaphelper.GravitySnapHelper
+import com.developers.chukimmuoi.androidkotlin.commons.recycler.listener.EndlessRecyclerViewScrollListener
+import com.developers.chukimmuoi.androidkotlin.constants.Constants
 
 /**
  * @author  : Hanet Electronics

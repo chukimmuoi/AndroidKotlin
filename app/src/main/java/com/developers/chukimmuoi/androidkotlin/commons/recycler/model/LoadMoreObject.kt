@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.model
+package com.developers.chukimmuoi.androidkotlin.commons.recycler.model
 
 /**
  * @author  : Hanet Electronics

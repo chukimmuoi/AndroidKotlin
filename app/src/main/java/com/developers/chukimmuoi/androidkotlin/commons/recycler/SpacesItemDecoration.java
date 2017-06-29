@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler;
+package com.developers.chukimmuoi.androidkotlin.commons.recycler;
 
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;

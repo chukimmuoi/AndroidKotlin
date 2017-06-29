@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.ui.custom.recycler
+package com.developers.chukimmuoi.androidkotlin.commons.recycler
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,7 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.developers.chukimmuoi.androidkotlin.R
-import com.developers.chukimmuoi.androidkotlin.ui.custom.recycler.model.LoadMoreObject
+import com.developers.chukimmuoi.androidkotlin.commons.recycler.model.LoadMoreObject
+import com.developers.chukimmuoi.androidkotlin.constants.Constants
 import com.developers.chukimmuoi.androidkotlin.utils.inflate
 import kotlinx.android.synthetic.main.item_recycler_circle_progress.view.*
 
