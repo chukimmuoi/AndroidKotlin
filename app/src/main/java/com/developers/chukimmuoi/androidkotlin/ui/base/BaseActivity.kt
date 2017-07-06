@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
@@ -28,7 +28,7 @@ import com.developers.chukimmuoi.androidkotlin.utils.overrideSize
  * Created by chukimmuoi on 6/13/17.
  */
 
-open class BaseActivity : AppCompatActivity(), BaseActivityView, BaseFragmentView,
+open class BaseActivity : FragmentActivity(), BaseActivityView, BaseFragmentView,
         BaseFragment.OnFragmentListener {
 
     private val TAG = BaseActivity::class.java.simpleName

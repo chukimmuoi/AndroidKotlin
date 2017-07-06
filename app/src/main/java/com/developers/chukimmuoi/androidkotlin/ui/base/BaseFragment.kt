@@ -19,7 +19,7 @@ import android.view.ViewGroup
  * Created by chukimmuoi on 6/18/17.
  */
 
-abstract class BaseFragment : Fragment(), BaseFragmentView {
+open abstract class BaseFragment : Fragment(), BaseFragmentView {
 
     private val TAG = BaseFragment::class.java.simpleName
 

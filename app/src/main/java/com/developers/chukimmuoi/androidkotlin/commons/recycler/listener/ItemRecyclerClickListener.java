@@ -16,14 +16,15 @@ import android.view.View;
  * Created by chukimmuoi on 6/25/17.
  */
 
-public class OnItemRecyclerClickListener implements RecyclerView.OnItemTouchListener {
+public class ItemRecyclerClickListener implements RecyclerView.OnItemTouchListener {
 
     private OnItemClickListener mListener;
 
     private GestureDetector mGestureDetector;
 
-    public OnItemRecyclerClickListener(Context context, final RecyclerView recyclerView,
-                                       OnItemClickListener listener) {
+    public ItemRecyclerClickListener(Context context,
+                                     final RecyclerView recyclerView,
+                                     OnItemClickListener listener) {
         mListener = listener;
 
         mGestureDetector

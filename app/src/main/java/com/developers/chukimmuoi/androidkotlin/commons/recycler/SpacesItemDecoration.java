@@ -22,6 +22,7 @@ import android.view.View;
  * Feel free to add any value you wish for SpacesItemDecoration. That value determines the amount of spacing.
  * Source: http://blog.grafixartist.com/pinterest-masonry-layout-staggered-grid/
  */
+
 public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
     private int mSpace;
     private int mSpanCount;

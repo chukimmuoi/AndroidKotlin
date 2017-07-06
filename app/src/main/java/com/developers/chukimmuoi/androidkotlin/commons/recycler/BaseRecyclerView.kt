@@ -2,6 +2,7 @@ package com.developers.chukimmuoi.androidkotlin.commons.recycler
 
 import android.content.Context
 import android.support.v7.widget.*
+import android.util.AttributeSet
 import android.view.Gravity
 import com.developers.chukimmuoi.androidkotlin.commons.recycler.gravitysnaphelper.GravityPagerSnapHelper
 import com.developers.chukimmuoi.androidkotlin.commons.recycler.gravitysnaphelper.GravitySnapHelper
@@ -18,11 +19,11 @@ import com.developers.chukimmuoi.androidkotlin.constants.Constants
  * Created by chukimmuoi on 6/23/17.
  */
 
-class BaseRecyclerView(context: Context) : RecyclerView(context), IBaseRecyclerView {
+open class BaseRecyclerView : RecyclerView, IBaseRecyclerView {
 
     private val TAG = BaseRecyclerView::class.java.simpleName
 
-    private val mContext: Context = context
+    private var mContext: Context? = null
 
     private var mTypeLayout: Int = Constants.LINEAR_LAYOUT
 
@@ -37,6 +38,16 @@ class BaseRecyclerView(context: Context) : RecyclerView(context), IBaseRecyclerV
     private var mOnEndlessScrolling: OnEndlessScrolling? = null
 
     private var mItemDecoration: ItemDecoration? = null
+
+    constructor(context: Context?) : super(context) {
+        mContext = context
+    }
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+        mContext = context
+    }
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle){
+        mContext = context
+    }
 
     override fun setLayoutManager(layout: LayoutManager?) {
         super.setLayoutManager(layout)
@@ -72,7 +83,7 @@ class BaseRecyclerView(context: Context) : RecyclerView(context), IBaseRecyclerV
                     //TODO: Load more full span (GridLayoutManager).
                     mGridLayoutManager?.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                         override fun getSpanSize(position: Int): Int {
-                            val adapter = adapter as BaseRecyclerAdapter<*, *>
+                            val adapter = adapter as BaseRecyclerAdapter
                             when (adapter.getItemViewType(position)) {
                                 Constants.VIEW_ITEM -> return 1
                                 Constants.VIEW_PROGRESS -> return spanCount

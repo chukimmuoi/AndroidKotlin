@@ -1,16 +1,11 @@
 package com.developers.chukimmuoi.androidkotlin.commons.recycler
 
-import android.content.Context
+import android.app.Activity
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.developers.chukimmuoi.androidkotlin.R
-import com.developers.chukimmuoi.androidkotlin.commons.recycler.model.LoadMoreObject
-import com.developers.chukimmuoi.androidkotlin.constants.Constants
-import com.developers.chukimmuoi.androidkotlin.utils.inflate
-import kotlinx.android.synthetic.main.item_recycler_circle_progress.view.*
+import com.developers.chukimmuoi.androidkotlin.commons.adapter.ItemAdapter
+import com.developers.chukimmuoi.androidkotlin.commons.adapter.delegate.AdapterDelegatesManager
+import com.developers.chukimmuoi.androidkotlin.commons.adapter.delegate.LoadMoreCircleDelegate
 
 /**
  * @author  : Hanet Electronics
@@ -22,50 +17,35 @@ import kotlinx.android.synthetic.main.item_recycler_circle_progress.view.*
  * Created by chukimmuoi on 6/23/17.
  */
 
-abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(context: Context,
-                                                                    recyclerView: BaseRecyclerView,
-                                                                    list: MutableList<T>)
-    : RecyclerView.Adapter<VH>(), IBaseRecyclerAdapter<T> {
+open class BaseRecyclerAdapter(context: Activity,
+                               recyclerView: BaseRecyclerView,
+                               list: MutableList<ItemAdapter>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>(), IBaseRecyclerAdapter<ItemAdapter> {
 
     private val TAG = BaseRecyclerAdapter::class.java.simpleName
 
-    protected val mContext   : Context = context
+    protected var mDelegateManager: AdapterDelegatesManager<List<ItemAdapter>> = AdapterDelegatesManager()
 
-    private val mRecyclerView: BaseRecyclerView = recyclerView
+    protected val mContext        : Activity = context
 
-    protected val mList      : MutableList<T> = list
+    private val mRecyclerView     : BaseRecyclerView = recyclerView
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH? {
-        val context : Context        = parent.context
-        val inflater: LayoutInflater = LayoutInflater.from(context)
+    private val mList             : MutableList<ItemAdapter> = list
 
-        var viewHolder: VH? = null
-
-        if (viewType === Constants.VIEW_PROGRESS) {
-            viewHolder = ProgressViewHolder(parent) as VH
-        } else if (viewType === Constants.VIEW_ITEM) {
-            val view = setLayout(inflater, parent)
-
-            viewHolder = createViewHolder(view)
-        }
-
-        return viewHolder
+    init {
+        mDelegateManager.addDelegate(LoadMoreCircleDelegate(mContext))
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        val type: Int = getItemViewType(position)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder? {
+        return mDelegateManager.onCreateViewHolder(parent, viewType)
+    }
 
-        if (type === Constants.VIEW_ITEM) {
-            displayItem(holder, position)
-        } else if (type === Constants.VIEW_PROGRESS) {
-            (holder as ProgressViewHolder).bind()
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        mDelegateManager.onBindViewHolder(mList, position, holder)
+    }
 
-            //TODO: Load more full span (StaggeredGridLayoutManager).
-            val layoutParams: ViewGroup.LayoutParams = holder.itemView.layoutParams
-            if (layoutParams != null && layoutParams is StaggeredGridLayoutManager.LayoutParams) {
-                layoutParams.isFullSpan = true
-            }
-        }
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>?) {
+        mDelegateManager.onBindViewHolder(mList, position, holder, payloads)
     }
 
     override fun getItemCount(): Int {
@@ -73,29 +53,8 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(context: Con
     }
 
     override fun getItemViewType(position: Int): Int {
-        if (mList != null) {
-            if (mList[position] is LoadMoreObject) {
-                return Constants.VIEW_PROGRESS
-            } else {
-                return Constants.VIEW_ITEM
-            }
-        }
-        return super.getItemViewType(position)
+        return mDelegateManager.getItemViewType(mList, position)
     }
-
-    class ProgressViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            parent.inflate(R.layout.item_recycler_circle_progress)) {
-
-        fun bind() {
-            itemView.progress_circle.visibility = View.VISIBLE
-        }
-    }
-
-    protected abstract fun setLayout(inflater: LayoutInflater, parent: ViewGroup?): View
-
-    protected abstract fun createViewHolder(view: View): VH
-
-    protected abstract fun displayItem(viewHolder: VH, position: Int)
 
     /**
      * Add item
@@ -104,7 +63,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(context: Con
      * @param item     new object
      * @param isScroll
      */
-    override fun insertItem(position: Int, item: T, isScroll: Boolean) {
+    override fun insertItem(position: Int, item: ItemAdapter, isScroll: Boolean) {
         if (position >= 0) {
             mList.add(position, item)
 
@@ -121,7 +80,7 @@ abstract class BaseRecyclerAdapter<T, VH : RecyclerView.ViewHolder>(context: Con
      * @param itemList      list object
      * @param isScroll
      */
-    override fun insertItem(positionStart: Int, itemList: List<T>, isScroll: Boolean) {
+    override fun insertItem(positionStart: Int, itemList: List<ItemAdapter>, isScroll: Boolean) {
         if (positionStart >= 0) {
             val itemCount: Int = itemList.size
             if (itemCount > 0) {

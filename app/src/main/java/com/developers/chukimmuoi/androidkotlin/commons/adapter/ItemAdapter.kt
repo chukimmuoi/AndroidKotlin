@@ -1,4 +1,4 @@
-package com.developers.chukimmuoi.androidkotlin.commons.recycler.model
+package com.developers.chukimmuoi.androidkotlin.commons.adapter
 
 /**
  * @author  : Hanet Electronics
@@ -7,7 +7,9 @@ package com.developers.chukimmuoi.androidkotlin.commons.recycler.model
  * @Email   : muoick@hanet.com
  * @Website : http://hanet.com/
  * @Project : AndroidKotlin
- * Created by chukimmuoi on 6/24/17.
+ * Created by chukimmuoi on 6/27/17.
  */
-class LoadMoreObject {
+
+interface ItemAdapter {
+    fun getViewType(): Int
 }
