@@ -6,11 +6,11 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
-import com.developers.chukimmuoi.androidkotlin.commons.adapter.Contact
 import com.developers.chukimmuoi.androidkotlin.commons.adapter.ItemAdapter
-import com.developers.chukimmuoi.androidkotlin.commons.adapter.LoadMoreCircleItem
 import com.developers.chukimmuoi.androidkotlin.commons.recycler.BaseRecyclerView
+import com.developers.chukimmuoi.androidkotlin.commons.recycler.model.LoadMoreCircleItem
 import com.developers.chukimmuoi.androidkotlin.constants.Constants
+import com.developers.chukimmuoi.androidkotlin.data.model.Contact
 import com.developers.chukimmuoi.androidkotlin.listener.onclick.OnItemClickListener
 import com.developers.chukimmuoi.androidkotlin.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -94,8 +94,7 @@ class MainActivity : BaseActivity(), OnItemClickListener, BaseRecyclerView.OnEnd
 
     /**
      * Clear all data ---> new action.
-     *
-     *
+
      * mList.clear();
      * mAdapter.notifyDataSetChanged(); [BaseRecyclerAdapter.reloadAll]
      * mEndlessScrollListener.resetState(); [resetStateEndless]

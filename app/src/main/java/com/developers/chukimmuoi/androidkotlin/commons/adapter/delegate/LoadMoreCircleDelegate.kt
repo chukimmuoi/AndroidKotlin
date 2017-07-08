@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.developers.chukimmuoi.androidkotlin.R
 import com.developers.chukimmuoi.androidkotlin.commons.adapter.ItemAdapter
-import com.developers.chukimmuoi.androidkotlin.commons.adapter.LoadMoreCircleItem
+import com.developers.chukimmuoi.androidkotlin.commons.recycler.model.LoadMoreCircleItem
 import com.developers.chukimmuoi.androidkotlin.utils.inflate
 import kotlinx.android.synthetic.main.item_recycler_circle_progress.view.*
 

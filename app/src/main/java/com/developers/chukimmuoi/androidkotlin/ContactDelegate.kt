@@ -4,9 +4,9 @@ import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.developers.chukimmuoi.androidkotlin.commons.adapter.Contact
 import com.developers.chukimmuoi.androidkotlin.commons.adapter.ItemAdapter
 import com.developers.chukimmuoi.androidkotlin.commons.adapter.delegate.AdapterDelegate
+import com.developers.chukimmuoi.androidkotlin.data.model.Contact
 import com.developers.chukimmuoi.androidkotlin.listener.onclick.OnItemClickListener
 import com.developers.chukimmuoi.androidkotlin.utils.inflate
 import kotlinx.android.synthetic.main.item_contact.view.*

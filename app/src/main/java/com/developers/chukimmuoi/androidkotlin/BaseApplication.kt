@@ -15,5 +15,5 @@ import java.util.logging.Logger
 
 class BaseApplication : Application() {
 
-    val TAG = Logger.getLogger(BaseApplication::class.java.name)
+    private val TAG = Logger.getLogger(BaseApplication::class.java.name)
 }

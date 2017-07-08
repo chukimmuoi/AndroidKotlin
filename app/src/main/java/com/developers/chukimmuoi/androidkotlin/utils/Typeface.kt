@@ -35,7 +35,7 @@ fun overrideFont(context: Context,
                  customFontFileNameInAssets: String) {
     try {
         val customFontTypeface
-                = Typeface.createFromAsset(context.getAssets(), customFontFileNameInAssets)
+                = Typeface.createFromAsset(context.assets, customFontFileNameInAssets)
 
         val defaultFontTypefaceField
                 = Typeface::class.java.getDeclaredField(defaultFontNameToOverride)

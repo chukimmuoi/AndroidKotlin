@@ -9,7 +9,7 @@ package com.developers.chukimmuoi.androidkotlin.commons.recycler
  * @Project : AndroidKotlin
  * Created by chukimmuoi on 6/23/17.
  */
-internal interface IBaseRecyclerAdapter<T> {
+internal interface IBaseRecyclerAdapter<in T> {
 
     fun insertItem(position: Int, item: T, isScroll: Boolean = false)
 
