@@ -181,36 +181,6 @@ open class BaseActivity : FragmentActivity(), BaseActivityView, BaseFragmentView
         mMaterialDialog = builder.show()
     }
 
-    override fun showDialogBasic(title: String, content: String,
-                                 positive: String, positiveCallback: ICallback?,
-                                 negative: String?, negativeCallback: ICallback?) {
-        showDialogBasic(title, content,
-                positive, positiveCallback,
-                negative, negativeCallback,
-                null, null)
-    }
-
-    override fun showDialogBasic(title: String, content: String,
-                                 positive: String, positiveCallback: ICallback?,
-                                 negative: String?) {
-        showDialogBasic(title, content,
-                positive, positiveCallback,
-                negative, null)
-    }
-
-    override fun showDialogBasic(title: String, content: String,
-                                 positive: String, positiveCallback: ICallback?) {
-        showDialogBasic(title, content,
-                positive, positiveCallback,
-                null)
-    }
-
-    override fun showDialogBasic(title: String, content: String,
-                                 positive: String) {
-        showDialogBasic(title, content,
-                positive, null)
-    }
-
     override fun showDialogBasic(title: Int, content: Int,
                                  positive: Int, positiveCallback: ICallback?,
                                  negative: Int?, negativeCallback: ICallback?,
@@ -219,36 +189,6 @@ open class BaseActivity : FragmentActivity(), BaseActivityView, BaseFragmentView
                 getString(positive), positiveCallback,
                 negative?.let { getString(it) }, negativeCallback,
                 neutral?.let { getString(it) }, neutralCallback)
-    }
-
-    override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int, positiveCallback: ICallback?,
-                                 negative: Int?, negativeCallback: ICallback?) {
-        showDialogBasic(getString(title), getString(content),
-                getString(positive), positiveCallback,
-                negative?.let { getString(it) }, negativeCallback,
-                null, null)
-    }
-
-    override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int, positiveCallback: ICallback?,
-                                 negative: Int?) {
-        showDialogBasic(getString(title), getString(content),
-                getString(positive), positiveCallback,
-                negative?.let { getString(it) }, null)
-    }
-
-    override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int, positiveCallback: ICallback?) {
-        showDialogBasic(getString(title), getString(content),
-                getString(positive), positiveCallback,
-                null)
-    }
-
-    override fun showDialogBasic(title: Int, content: Int,
-                                 positive: Int) {
-        showDialogBasic(getString(title), getString(content),
-                getString(positive), null)
     }
 
     override fun showDialogProgress(title: String, content: String, horizontal: Boolean) {
@@ -307,16 +247,8 @@ open class BaseActivity : FragmentActivity(), BaseActivityView, BaseFragmentView
         }
     }
 
-    override fun showToast(message: String) {
-        showToast(message, false)
-    }
-
     override fun showToast(message: Int, isLongTime: Boolean) {
         showToast(getString(message), isLongTime)
-    }
-
-    override fun showToast(message: Int) {
-        showToast(message, false)
     }
 
     override fun dismissToast() {
@@ -332,18 +264,10 @@ open class BaseActivity : FragmentActivity(), BaseActivityView, BaseFragmentView
         mSnackbar?.show()
     }
 
-    override fun showSnackbar(view: View, message: String, typeTime: Int) {
-        showSnackbar(view, message, typeTime, null, null)
-    }
-
     override fun showSnackbar(view: View, message: Int, typeTime: Int,
                               actionName: Int?, onClickListener: View.OnClickListener?) {
         showSnackbar(view, getString(message), typeTime,
                 actionName?.let { getString(actionName) }, onClickListener)
-    }
-
-    override fun showSnackbar(view: View, message: Int, typeTime: Int) {
-        showSnackbar(view, getString(message), typeTime)
     }
 
     override fun dismissSnackbar() {

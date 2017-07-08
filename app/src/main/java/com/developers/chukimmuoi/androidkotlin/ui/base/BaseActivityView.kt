@@ -19,42 +19,14 @@ interface BaseActivityView : BaseView {
     fun destroyTypeface()
 
     fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback?,
-                        negative: String?, negativeCallback: ICallback?,
-                        neutral: String?, neutralCallback: ICallback?)
-
-    fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback?,
-                        negative: String?, negativeCallback: ICallback?)
-
-    fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback?,
-                        negative: String?)
-
-    fun showDialogBasic(title: String, content: String,
-                        positive: String, positiveCallback: ICallback?)
-
-    fun showDialogBasic(title: String, content: String,
-                        positive: String)
+                        positive: String, positiveCallback: ICallback? = null,
+                        negative: String? = null, negativeCallback: ICallback? = null,
+                        neutral: String? = null, neutralCallback: ICallback? = null)
 
     fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback?,
-                        negative: Int?, negativeCallback: ICallback?,
-                        neutral: Int?, neutralCallback: ICallback?)
-
-    fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback?,
-                        negative: Int?, negativeCallback: ICallback?)
-
-    fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback?,
-                        negative: Int?)
-
-    fun showDialogBasic(title: Int, content: Int,
-                        positive: Int, positiveCallback: ICallback?)
-
-    fun showDialogBasic(title: Int, content: Int,
-                        positive: Int)
+                        positive: Int, positiveCallback: ICallback? = null,
+                        negative: Int? = null, negativeCallback: ICallback? = null,
+                        neutral: Int? = null, neutralCallback: ICallback? = null)
 
     fun showDialogProgress(title: String, content: String, horizontal: Boolean)
 
@@ -72,25 +44,17 @@ interface BaseActivityView : BaseView {
 
     fun hideDialog()
 
-    fun showToast(message: String, isLongTime: Boolean)
+    fun showToast(message: String, isLongTime: Boolean = false)
 
-    fun showToast(message: String)
-
-    fun showToast(message: Int, isLongTime: Boolean)
-
-    fun showToast(message: Int)
+    fun showToast(message: Int, isLongTime: Boolean = false)
 
     fun dismissToast()
 
     fun showSnackbar(view: View, message: String, typeTime: Int,
-                     actionName: String?, onClickListener: View.OnClickListener?)
-
-    fun showSnackbar(view: View, message: String, typeTime: Int)
+                     actionName: String? = null, onClickListener: View.OnClickListener? = null)
 
     fun showSnackbar(view: View, message: Int, typeTime: Int,
-                     actionName: Int?, onClickListener: View.OnClickListener?)
-
-    fun showSnackbar(view: View, message: Int, typeTime: Int)
+                     actionName: Int? = null, onClickListener: View.OnClickListener? = null)
 
     fun dismissSnackbar()
 }

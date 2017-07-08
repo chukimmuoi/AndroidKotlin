@@ -63,7 +63,7 @@ class MainActivity : BaseActivity(), OnItemClickListener, BaseRecyclerView.OnEnd
     }
 
     override fun onItemClick(className: String, itemView: View, position: Int) {
-        showToast("Test $position")
+        showToast("Test $position", true)
     }
 
     /**
